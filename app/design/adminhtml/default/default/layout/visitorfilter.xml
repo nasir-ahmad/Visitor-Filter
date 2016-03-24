@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <visitorfilter_adminhtml_filter_index>
+	<reference name="content">
+	  <block type="visitorfilter/adminhtml_filter" name="filter" />
+	</reference>
+  </visitorfilter_adminhtml_filter_index>
+  <visitorfilter_adminhtml_message_index>
+	<reference name="content">
+	  <block type="visitorfilter/adminhtml_message" name="message" />
+	</reference>
+  </visitorfilter_adminhtml_message_index>
+</layout>

@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <DIT_VisitorFilter>
+      <version>0.1.0</version>
+    </DIT_VisitorFilter>
+  </modules>
+  <global>
+	<frontend>
+		<layout>
+			<updates>
+				<visitorfilter>
+					<file>visitorfilter.xml</file>
+				</visitorfilter>
+			</updates>
+		</layout>
+	</frontend>
+    <helpers>
+      <visitorfilter>
+        <class>DIT_VisitorFilter_Helper</class>
+      </visitorfilter>
+    </helpers>
+	<blocks>
+	  <visitorfilter>
+		<class>DIT_VisitorFilter_Block</class>
+	  </visitorfilter>
+	</blocks>
+	<models>
+	  <visitorfilter>
+		<class>DIT_VisitorFilter_Model</class>
+		<resourceModel>visitorfilter_mysql4</resourceModel>
+	  </visitorfilter>
+	  <visitorfilter_mysql4>
+		<class>DIT_VisitorFilter_Model_Mysql4</class>
+		<entities>		  
+			  <filter>
+				<table>visitorfilter_filter</table>
+			  </filter>		  
+			  <message>
+				<table>visitorfilter_message</table>
+			  </message>
+        </entities>
+	  </visitorfilter_mysql4>
+	</models>
+	<events>
+		<controller_action_predispatch>
+			<observers>
+				<visitorfilter_controller_front_init_before_handler>
+					<type>singleton</type>
+					<class>visitorfilter/observer</class>
+					<method>controllerFrontInitBeforeHandler</method>
+				</visitorfilter_controller_front_init_before_handler>			
+			</observers>
+		</controller_action_predispatch>
+	</events>
+	<resources>
+	  <visitorfilter_setup>
+		<setup>
+		  <module>DIT_VisitorFilter</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </visitorfilter_setup>
+	  <visitorfilter_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </visitorfilter_write>
+	  <visitorfilter_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </visitorfilter_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <visitorfilter>
+	    <use>admin</use>
+		<args>
+		  <module>DIT_VisitorFilter</module>
+		  <frontName>admin_visitorfilter</frontName>
+		</args>
+	  </visitorfilter>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <visitorfilter module="visitorfilter">
+		<title>Visitor Filter</title>
+		<sort_order>100</sort_order>
+		<children>
+		  <filter module="visitorfilter">
+		    <title>Manage Filters</title>
+			<sort_order>0</sort_order>
+			<action>admin_visitorfilter/adminhtml_filter</action>
+		  </filter>
+		  <message module="visitorfilter">
+		    <title>Manage Messages</title>
+			<sort_order>10</sort_order>
+			<action>admin_visitorfilter/adminhtml_message</action>
+		  </message>
+		</children>
+	  </visitorfilter>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<visitorfilter translate="title" module="visitorfilter">
+			  <title>Visitor Filter</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <filter translate="title">
+			<title>Manage Filters</title>
+			<sort_order>0</sort_order>
+		  </filter>
+		  <message translate="title">
+			<title>Manage Messages</title>
+			<sort_order>10</sort_order>
+		  </message>
+			  </children>
+			</visitorfilter>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<visitorfilter>
+		  <file>visitorfilter.xml</file>
+		</visitorfilter>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 
